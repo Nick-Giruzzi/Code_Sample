@@ -15,9 +15,8 @@ class Config:
     BASE_DIR = globals.basedir
     STATIC_FOLDER = f"{globals.basedir}/app/static"     
     TEMPLATES_FOLDER = f"{globals.basedir}/app/templates"
-    # Settings that were referenced in C43 to configure scheduler API
     SCHEDULER_API_ENABLED = True
     SCHEDULER_AUTH =  HTTPBasicAuth()
-    #SCHEDULER_API_PREFIX = "/scheduler"        ## Wasnt used but was present
-    #SCHEDULER_ENDPOINT_PREFIX = "scheduler."   ## Wasnt used but was present
-    #SCHEDULER_ALLOWED_HOSTS = ["*"]            ## Wasnt used but was present
+    #SCHEDULER_API_PREFIX = "/scheduler"        
+    #SCHEDULER_ENDPOINT_PREFIX = "scheduler."   
+    #SCHEDULER_ALLOWED_HOSTS = ["*"]            

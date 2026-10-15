@@ -196,10 +196,5 @@ def get_data():
             respDict['mfa'] = False
         return jsonify(respDict)
 
-    #    userData = dict()
-    #    users = User.query.all()
-    #    for ind, u in enumerate(users):
-    #        userData[ind] = u.to_dict()
-    #    return jsonify(userData)
     return jsonify({"Warning":"Unauthorized access"})
 

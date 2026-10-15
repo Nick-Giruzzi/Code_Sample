@@ -25,10 +25,8 @@ def create_app(config_class=Config):
         return User.query.get(int(user_id))
 
     from app.main.main import main as main_blueprint
-    #app.register_blueprint(main_blueprint)      # url_prefix='/' # -- If used, each blueprint can have its own templates & static folders.
     
     from app.auth.auth import auth as auth_blueprint
-    #app.register_blueprint(auth_blueprint)
 
     db.init_app(app)
     with app.app_context():
