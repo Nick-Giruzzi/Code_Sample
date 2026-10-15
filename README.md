@@ -1,5 +1,8 @@
-**PLEASE NOTE**
+# PLEASE NOTE
+
 I understand that some of the data/implementations present in some of these files should not be present/visible or implemented in that fashion, but due to the nature of the work and the limitations we faced, we had to make some compromises since it was all virtualized. 
+
+## Short Description 
 
 This repo contains code I created to imitate a fake online banking website using Python Flask framework for a previous training exercise.
 
