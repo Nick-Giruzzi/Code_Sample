@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+
+
+{% if setting=='MFA' %}
+    <main>
+        <section id="transaction">
+            <h2>Configure MFA</h2>
+            <h3>Please enter the most recent MFA code sent to your email to complete MFA verification.<br>The code will expire in 5 minutes.</h3>
+            <form method="POST" action="{{url_for('auth.settings',setting='MFA')}}">
+                <table id="mfa-table">
+                    <tbody>
+                        <tr>
+                            <th>MFA Code</th>
+                            <td><input type="text" id="code" name="code"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table id="set-table">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="text-align: center;"><a href="{{url_for('auth.settings',setting='resend')}}">Resend MFA Code</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+{% elif setting=='Login' %}
+    <main>
+        <section id="transaction">
+            <h2>Login History</h2>
+                <table id="trans-table">
+                    <thead>
+                        <tr>
+                            <th>Originating IP Address</th>
+                            <th>Date</th>
+                            <th>Session Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for login in logins %}
+                            <tr>
+                                <td>{{ login.originated }}</td>
+                                <td>{{ login.date }}</td>
+                                <td>{{ login.session_type }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </section>
+    </main>
+
+{% elif setting == 'disable' %}
+    <main>
+        <section id="disable">
+            <h2></h2>
+            <form method="POST" action="{{url_for('auth.settings',setting='disable')}}">
+                <table id="dis-table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">Disable MFA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="yes">Yes</label>
+                                <input type="radio" name='disable' id="yes" value="yes">
+                            </td>
+                            <td></td>
+                            <td>
+                                <label for="no">No</label>
+                                <input type="radio" name='disable' id="no" value="no">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button id='dis-btn' type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+{% else %}
+    <main class="trans">
+        <section id="transaction">
+        <h2 class="settings">Account Settings</h2>
+            <table id="set-table">
+                <tbody>
+                    <tr>
+                        {% if current_user.mfa == False %}
+                            <td colspan="2" style="text-align: center;"><a href="{{url_for('auth.settings',setting='MFA')}}">Enable MFA</a></td>
+                        {% else %}  
+                            <td colspan="2" style="text-align: center;"><a href="{{url_for('auth.settings',setting='disable')}}">Disable MFA</a></td>
+                        {% endif %}
+                        <td colspan="2" style="text-align: center;"><a href="{{url_for('auth.settings',setting='login')}}">Login History</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <form method="POST" action="{{url_for('auth.settings')}}">
+                <table id="trans-table">
+                <tbody>
+                    <tr>
+                        <th colspan="2" style="text-decoration: underline;">Update Password</th>
+                    </tr>
+                    <tr>
+                        <th>Old Password</th>
+                        <td><input type="password" id="old_password" name="old_password"></td>
+                    </tr>
+                    <tr>
+                        <th>New Password</th>
+                        <td><input type="password" id="new_password" name="new_password"></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-decoration: underline;">Update Email</th>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><input type="text" id="email" name="email" placeholder="{{current_user.email}}"></td>
+                    </tr>
+                </tbody>
+                </table>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+{% endif %}
+
+{% endblock %}

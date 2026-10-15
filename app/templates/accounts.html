@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Account Overview{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+{% if accs %}
+<main>
+    <h2 class="welcome">Welcome {{current_user.first_name}}!</h2>
+    <section id="accounts">
+        <h3>Accounts Overview</h3>
+        <table id="account-table">
+        <thead>
+            <tr>
+                <th>Account Type</th>
+                <th>Account Number</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if accs == None %}
+                <tr>
+                    <td colspan="3">No accounts found for user</td>
+                </tr>
+            {% else %}
+                {% for acc in accs %}
+                    <tr>
+                        <td>{{acc.acc_type}}</td>
+                        <td><a href="{{ url_for('auth.accounts',acc_num=acc.number)}}">{{acc.number}}</a></td>
+                        <td>${{acc.balance}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        <tbody>
+        </table>
+    </section>
+</main>
+
+{% elif trans %}
+<main class="trans">
+    <h2 class="welcome"></h2>
+    <section id="transaction">
+        <h3>Account Number:  {{acc.number}}</h3>
+        <table id="trans-table">
+        <thead>
+            <tr>
+                <th>Transaction Type</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if trans == None %}
+                <tr>
+                    <td colspan="3">No transactions found for this account</td>
+                </tr>
+            {% else %}
+                {% for t in trans %}
+                    <tr>
+                        <td>{{t.trans_type}}</td>
+                        <td>${{t.amount}}</td>
+                        <td>{{t.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan=2>Current Balance</th>
+                <td>${{acc.balance}}</td>
+            </tr>
+        </tfoot>
+        </table>
+    </section>
+</main>
+{% else %}
+<main class="trans">No account information present</main>
+{% endif %}
+
+{% endblock %}

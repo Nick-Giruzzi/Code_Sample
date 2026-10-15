@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}MFA Verification{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <section id="transaction">
+        <h2 style="text-decoration: underline;">MFA Verification</h2>
+        <h3>Please enter MFA code to login.</h3>
+        <form method="POST" action="{{url_for('main.mfa')}}">
+            <table id="mfa-table">
+                <tbody>
+                    <tr>
+                        <th>MFA Code</th>
+                        <td><input type="text" id="code" name="code"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table id="set-table">
+                <tbody>
+                    <tr>
+                        <td colspan="2" style="text-align: center;"><a href="{{url_for('main.mfa', resend='resend')}}">Resend MFA Code</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+</main>
+
+{% endblock %}

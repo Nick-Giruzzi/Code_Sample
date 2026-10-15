@@ -1,0 +1,11 @@
+# pip3 install -r requirements || pip3 install --upgrade -r requirements && sudo
+flask==3.0.3
+Flask_APScheduler==1.13.1
+Flask_Cors==5.0.0
+Flask_Executor==1.0.0
+flask_sqlalchemy==3.1.1
+Flask_Login==0.6.3
+paramiko==3.5.1
+PyYAML==6.0.2
+requests==2.32.3
+apscheduler==3.11.0
